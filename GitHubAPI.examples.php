@@ -42,12 +42,12 @@ The getUserDetails() function returns an array like so:
 }
 */
 // Store the user details array in $apiTestUser
-$apiTestUser = $apiTest->getUserDetails();
+$apiTestUser = $apiTest->getDetails();
 // Echo the users GitHub ID number
 echo 'Testing getUserDetails(): ' . $apiTestUser['id'] . '<br/><br/>';
 
 // Store the users repos array in $apiTestRepos
-$apiTestRepos = $apiTest->getUserRepos();
+$apiTestRepos = $apiTest->getRepos();
 
 echo 'Testing getUserRepos():';
 echo '<ol>';
@@ -58,6 +58,6 @@ for ($i = 0; $i < count($apiTestRepos); $i++)
 }
 echo '</ol>';
 
-$apiTestRepo = $apiTest->getUserRepo($apiTestRepos[0]['name']);
+$apiTestRepo = $apiTest->getRepo($apiTestRepos[0]['name']);
 echo 'Testing getUserRepo(aRepo)<br/>';
 echo $apiTestRepo['name'];
