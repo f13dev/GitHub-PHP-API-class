@@ -82,6 +82,72 @@ class GitHubAPI
     /*
      *
      */
-    function getForks
+    function getFollowers()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/followers';
+        return $this->getResults($url);
+    }
     
+    /*
+     *
+     */
+    function getFollowing()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/following';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getGists()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/gists';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getStarred()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/starred';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getSubscriptions()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/subscriptions';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getOrganizations()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/orgs';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getEvents()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/events';
+        return $this->getResults($url);
+    }
+    
+    /*
+     *
+     */
+    function getReceivedEvents()
+    {
+        $url = 'https://api.github.com/users/' . $this->user . '/received_events';
+        return $this->getResults($url);
+    }
 }
