@@ -47,18 +47,32 @@ class GitHubAPI
         return $result;
     }
     
+    /*
+     * Returns an array of items relating to the GitHub user
+     * for which an object was created
+     */
     function getUserDetails()
     {
         $url = 'https://api.github.com/users/' . $this->user;
         return $this->getResults($url);
     }
     
+    /*
+     * Returns an array of repos relating to the GitHub user
+     * for which an object was created, each containing an array 
+     * of details about each repository.
+     */
     function getUserRepos()
     {
         $url = 'https://api.github.com/users/' . $this->user . '/repos';
         return $this->getResults($url);
     }
     
+    /*
+     * Returns an array of details relating to the repository provided
+     * as the argument, associated with the user for which an object
+     * was created.
+     */
     function getUserRepo($repo)
     {
         $url = 'https://api.github.com/repos/' . $this->user . '/' . $repo;
