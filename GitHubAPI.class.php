@@ -4,20 +4,20 @@ class GitHubAPI
 {
     
     // Variable to contain the GitHub user name
-    var $user;
+    private $user;
     
     // Variables to store API calls to reduce call cycles
-    var $details;
-    var $repos;
-    var $repo;
-    var $followers;
-    var $following;
-    var $gists;
-    var $starred;
-    var $subscriptions;
-    var $organizations;
-    var $events;
-    var $receivedEvents;
+    private $details;
+    private $repos;
+    private $repo;
+    private $followers;
+    private $following;
+    private $gists;
+    private $starred;
+    private $subscriptions;
+    private $organizations;
+    private $events;
+    private $receivedEvents;
     
     /*
      * Creates a new instance of the GitHub API
