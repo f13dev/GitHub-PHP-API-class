@@ -249,9 +249,165 @@ class GitHubAPI
         }
     }
     
+    /*
+     * Returns the login name
+     */
     function getLogin()
     {
         $this->getDetails();
         return $this->details['login'];
+    }
+    
+    /*
+     * Returns the GitHub numeric ID
+     */
+    function getID()
+    {
+        $this->getDetails();
+        return $this->details['id'];
+    }
+    
+    /*
+     * Returns the avatar URL
+     */
+    function getAvatarURL()
+    {
+        $this->getDetails();
+        return $this->details['avatar_url'];
+    }
+    
+    /*
+     * Returns the gravatar ID
+     */
+    function getGravatarID()
+    {
+        $this->getDetails();
+        return $this->details['gravatar_id'];
+    }
+    
+    /*
+     * Returns the URL of the users profile
+     */
+    function getProfileURL()
+    {
+        $this->getDetails();
+        return $this->details['html_url'];
+    }
+    
+    /*
+     * Returns the users name
+     */
+    function getName()
+    {
+        $this->getDetails();
+        return $this->details['name'];
+    }
+    
+    /*
+     * Returns the users company
+     */
+    function getCompany()
+    {
+        $this->getDetails();
+        return $this->details['company'];
+    }
+    
+    /*
+     * Returns the users website URL
+     */
+    function getBlog()
+    {
+        $this->getDetails();
+        return $this->details['blog'];
+    }
+    
+    /*
+     * Returns the users location
+     */
+    function getLocation()
+    {
+        $this->getDetails();
+        return $this->details['location'];
+    }
+    
+    /*
+     * Returns the users email address
+     */
+    function getEmail()
+    {
+        $this->getDetails();
+        return $this->details['email'];
+    }
+    
+    /*
+     * Returns the users hierable status (true, false or null)
+     */
+    function getHierable()
+    {
+        $this->getDetails();
+        return $this->details['hierable'];
+    }
+    
+    /*
+     * Returns the users bio
+     */
+    function getBio()
+    {
+        $this->getDetails();
+        return $this->details['bio'];
+    }
+    
+    /*
+     * Returns the number of public repos
+     */
+    function getNumberRepos()
+    {
+        $this->getDetails();
+        return $this->details['public_repos'];
+    }
+    
+    /*
+     * Returns the number of public gists
+     */
+    function getNumberGists()
+    {
+        $this->getDetails();
+        return $this->details['public_gists'];
+    }
+    
+    /*
+     * Returns the number of followers
+     */
+    function getNumberFollowers()
+    {
+        $this->getDetails();
+        return $this->details['followers'];
+    }
+    
+    /*
+     * Returns the number of following
+     */
+    function getNumberFollowing()
+    {
+        $this->getDetails();
+        return $this->details['following'];
+    }
+    
+    /*
+     * Returns the date and time that the profile was created
+     */
+    function getProfileCreationTime()
+    {
+        $this->getDetails();
+        return $this->details['created_at'];
+    }
+    
+    /*
+     * Returns the date and time that the profile was last updated
+     */
+    function getProfileUpdateTime()
+    {
+        $this->getDetails();
+        return $this->details['updated_at'];
     }
 }

@@ -4,65 +4,46 @@ require_once('GitHubAPI.class.php');
 
 // Create a new instance of the GitHubAPI, stored in $apiTest
 // giving the username 'f13dev' as the argument
-$apiTest = new GitHubAPI('f13dev');
+$api = new GitHubAPI('f13dev');
 
-/*
-The getUserDetails() function returns an array like so:
-{
-    [login],                The username
-    [id],                   A numeric GitHub ID
-    [avatar_url],           URL of your avatar
-    [gravatar_id],          The users Gravatar ID
-    [url],                  The URL used to retrieve the API call
-    [html_url],             The URL of the users profile
-    [followers_url],        The API URL to call the users followers
-    [following_url],        The API URL to call the users following
-    [gists_url],            The API URL to call the users gists
-    [starred_url],          The API URL to call the users starred
-    [subscriptions_url],    The API URL to call the users subscriptions
-    [organizations_url],    The API URL to call the users organizations
-    [repos_url],            The API URL to call the users repos
-    [events_url],           The API URL to call the users events
-    [received_events_url],  The API URL to call the users received events
-    [type],                 User, Admin etc...
-    [site_admin],           Whether the user is a GitHub admin (true or false)
-    [name],                 The users real name
-    [company],              The users company
-    [blog],                 The users website URL
-    [location],             The users geographical location
-    [email],                The users email address (returns null if email is hidden)
-    [hireable],             Whether the user is hireable (true or false, returns null if not set)
-    [bio],                  The users bio
-    [public_repos],         The number of public repos for the user
-    [public_gists],         The number of public gists for the user
-    [followers],            The number of followers for the user
-    [following],            The number of following for the user
-    [created_at],           When the user profile was created
-    [updated_at]            When the usre profile was last updated
-}
-*/
-// Store the user details array in $apiTestUser
-$apiTest->getDetails();
-// Echo the users GitHub ID number
-echo 'Testing getUserDetails(): ' . $apiTest->details['id'] . '<br/><br/>';
+// Get Username
+echo 'Login: ' . $api->getLogin() . '<br/>';
+// Get Github ID
+echo 'ID: ' . $api->getID() . '<br/>';
+// Get avatar URL
+echo 'Avatar URL: ' . $api->getAvatarURL() . '<br/>';
+// Get Gravatar ID
+echo 'Gravatar ID: ' . $api->getGravatarID() . '<br/>';
+// Get profile url
+echo 'Profile URL: ' . $api->getProfileURL() . '<br/>';
+// Get name
+echo 'Name: ' . $api->getName() . '<br/>';
+// Get company
+echo 'Company: ' . $api->getCompany() . '<br/>';
+// Get blog or user website
+echo 'Blog: ' . $api->getBlog() . '<br/>';
+// Get user location
+echo 'Location: ' . $api->getLocation() . '<br/>';
+// Get user email (may not work with all users as it may be hiddne)
+echo 'Email: ' . $api->getEmail() . '<br/>';
+// Get hierable (returns boolean or null if not set)
+echo 'Hierable: ' . $api->getHierable() . '<br/>';
+// Get user bio
+echo 'Bio: ' . $api->getBio() . '<br/>';
+// Get the number of public repos the user has
+echo 'Number of repos: ' . $api->getNumberRepos() . '<br/>';
+// Get the number of public gists the user has
+echo 'Number of gists: ' . $api->getNumberGists() . '<br/>';
+// Get the number of followers of the user
+echo 'Number of followers: ' . $api->getNumberFollowers() . '<br/>';
+// Get the number of users that the user is following
+echo 'Number of following: ' . $api->getNumberFollowing() . '<br/>';
+// Get the time and date that the user account was created
+echo 'Creation date/time: ' . $api->getProfileCreationTime() . '<br/>';
+// Get the time and date that the user profile was last updated
+echo 'Last updated: ' . $api->getProfileUpdateTime() . '<br/>';
 
-// Store the users repos array in $apiTestRepos
-$apiTest->getRepos();
 
-echo 'Testing getUserRepos():';
-echo '<ol>';
-for ($i = 0; $i < count($apiTest->repos); $i++)
-{
-    // For each repo for the user, show a list item containing it's name
-    echo '<li>' . $apiTest->repos[$i]['name'] . '</li>';
-}
-echo '</ol>';
-
-$apiTest->getRepo('AlbumSystem');
-//print_r($apiTest->repo);
-echo 'Testing getUserRepo(aRepo)<br/>';
-echo $apiTest->repo['name'];
-
-// Testing rateLimit()
-$apiTest->getRateLimit();
-echo 'Rate limit: ' . $apiTest->rateLimit['resources']['core']['limit'];
+// Show the number of remaining API calls before the rate limit is reached
+$api->getRateLimit();
+echo 'Rate limit: ' . $api->rateLimit['resources']['core']['remaining'];
