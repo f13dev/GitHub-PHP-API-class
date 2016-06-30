@@ -6,12 +6,37 @@ class GitHubAPI
     // Variable to contain the GitHub user name
     var $user;
     
+    // Variables to store API calls to reduce call cycles
+    var $details;
+    var $repos;
+    var $repo;
+    var $followers;
+    var $following;
+    var $gists;
+    var $starred;
+    var $subscriptions;
+    var $organizations;
+    var $events;
+    var $receivedEvents;
+    
     /*
      * Creates a new instance of the GitHub API
      */
     function GitHubAPI($aUser)
     {
+        // Set the user variable to the argument aUser
         $this->user = $aUser;
+        // Set the API variables to null
+        $this->details = null;
+        $this->repos = null;
+        $this->followers = null;
+        $this->following = null;
+        $this->gists = null;
+        $this->starred = null;
+        $this->subscriptions = null;
+        $this->organizations = null;
+        $this->events = null;
+        $this->receivedEvents = null;
     }
     
     /**
