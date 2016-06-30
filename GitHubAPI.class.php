@@ -97,8 +97,11 @@ class GitHubAPI
      */
     function getDetails()
     {
-        $url = 'https://api.github.com/users/' . $this->user;
-        $this->details = $this->getResults($url);
+        if ($this->details == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user;
+            $this->details = $this->getResults($url);
+        }
     }
     
     /*
@@ -108,8 +111,11 @@ class GitHubAPI
      */
     function getRepos()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/repos';
-        $this->repos = $this->getResults($url);
+        if ($this->repos == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/repos';
+            $this->repos = $this->getResults($url);
+        }
     }
     
     /*
@@ -119,8 +125,9 @@ class GitHubAPI
      */
     function getRepo($repo)
     {
+        // As each call may be for a different repo this method will not check
+        // if the var is null, and will be overritten each time.
         $url = 'https://api.github.com/repos/' . $this->user . '/' . $repo;
-        print_r('Retrieving: ' . $url . '<br/><br/>');
         $this->repo = $this->getResults($url);
     }
     
@@ -130,8 +137,11 @@ class GitHubAPI
      */
     function getFollowers()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/followers';
-        return $this->getResults($url);
+        if($this->followers == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/followers';
+            $this->followers = $this->getResults($url);
+        }
     }
     
     /*
@@ -140,8 +150,11 @@ class GitHubAPI
      */
     function getFollowing()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/following';
-        return $this->getResults($url);
+        if ($this->following == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/following';
+            $this->following = $this->getResults($url);
+        }
     }
     
     /*
@@ -150,8 +163,11 @@ class GitHubAPI
      */
     function getGists()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/gists';
-        return $this->getResults($url);
+        if ($this->gists == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/gists';
+            $this->gists = $this->getResults($url);
+        }
     }
     
     /*
@@ -160,8 +176,11 @@ class GitHubAPI
      */
     function getStarred()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/starred';
-        return $this->getResults($url);
+        if ($this->starred == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/starred';
+            $this->starred = $this->getResults($url);
+        }
     }
     
     /*
@@ -170,8 +189,11 @@ class GitHubAPI
      */
     function getSubscriptions()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/subscriptions';
-        return $this->getResults($url);
+        if ($this->subscriptions == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/subscriptions';
+            $this->subscriptions = $this->getResults($url);
+        }
     }
     
     /*
@@ -180,8 +202,11 @@ class GitHubAPI
      */
     function getOrganizations()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/orgs';
-        return $this->getResults($url);
+        if ($this->organizations == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/orgs';
+            $this->subscriptions = $this->getResults($url);
+        }
     }
     
     /*
@@ -190,8 +215,11 @@ class GitHubAPI
      */
     function getEvents()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/events';
-        return $this->getResults($url);
+        if ($this->events == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/events';
+            $this->events = $this->getResults($url);
+        }
     }
     
     /*
@@ -200,13 +228,25 @@ class GitHubAPI
      */
     function getReceivedEvents()
     {
-        $url = 'https://api.github.com/users/' . $this->user . '/received_events';
-        return $this->getResults($url);
+        if ($this->receivedEvents == null)
+        {
+            $url = 'https://api.github.com/users/' . $this->user . '/received_events';
+            $this->receivedEvents = $this->getResults($url);
+        }
     }
     
     function getRateLimit()
     {
-        $url = 'https://api.github.com/rate_limit';
-        $this->rateLimit = $this->getResults($url);
+        if ($this->rateLimit == null)
+        {
+            $url = 'https://api.github.com/rate_limit';
+            $this->rateLimit = $this->getResults($url);
+        }
+    }
+    
+    function getLogin()
+    {
+        $this->getDetails();
+        return $this->details['login'];
     }
 }
