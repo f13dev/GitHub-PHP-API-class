@@ -42,22 +42,27 @@ The getUserDetails() function returns an array like so:
 }
 */
 // Store the user details array in $apiTestUser
-$apiTestUser = $apiTest->getDetails();
+$apiTest->getDetails();
 // Echo the users GitHub ID number
-echo 'Testing getUserDetails(): ' . $apiTestUser['id'] . '<br/><br/>';
+echo 'Testing getUserDetails(): ' . $apiTest->details['id'] . '<br/><br/>';
 
 // Store the users repos array in $apiTestRepos
-$apiTestRepos = $apiTest->getRepos();
+$apiTest->getRepos();
 
 echo 'Testing getUserRepos():';
 echo '<ol>';
-for ($i = 0; $i < count($apiTestRepos); $i++)
+for ($i = 0; $i < count($apiTest->repos); $i++)
 {
     // For each repo for the user, show a list item containing it's name
-    echo '<li>' . $apiTestRepos[$i]['name'] . '</li>';
+    echo '<li>' . $apiTest->repos[$i]['name'] . '</li>';
 }
 echo '</ol>';
 
-$apiTestRepo = $apiTest->getRepo($apiTestRepos[0]['name']);
+$apiTest->getRepo('AlbumSystem');
+//print_r($apiTest->repo);
 echo 'Testing getUserRepo(aRepo)<br/>';
-echo $apiTestRepo['name'];
+echo $apiTest->repo['name'];
+
+// Testing rateLimit()
+$apiTest->getRateLimit();
+echo 'Rate limit: ' . $apiTest->rateLimit['resources']['core']['limit'];

@@ -1,23 +1,25 @@
 <?php
-
 class GitHubAPI 
-{
-    
+{    
     // Variable to contain the GitHub user name
     private $user;
     
+    // Store the Oauth key
+    private $token = '';
+    
     // Variables to store API calls to reduce call cycles
-    private $details;
-    private $repos;
-    private $repo;
-    private $followers;
-    private $following;
-    private $gists;
-    private $starred;
-    private $subscriptions;
-    private $organizations;
-    private $events;
-    private $receivedEvents;
+    var $details;
+    var $repos;
+    var $repo;
+    var $followers;
+    var $following;
+    var $gists;
+    var $starred;
+    var $subscriptions;
+    var $organizations;
+    var $events;
+    var $receivedEvents;
+    var $rateLimit;
     
     /*
      * Creates a new instance of the GitHub API
@@ -29,6 +31,7 @@ class GitHubAPI
         // Set the API variables to null
         $this->details = null;
         $this->repos = null;
+        $this->repo = null;
         $this->followers = null;
         $this->following = null;
         $this->gists = null;
@@ -43,17 +46,33 @@ class GitHubAPI
       * Returns an array of items relating to the GitHub API url
       * given in the argument.
       */
-    function getResults($url)
+    private function getResults($url)
     {
         // Start curl
         $curl = curl_init();
         // Set curl options
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPGET, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ));
+        
+        // Check if a token is set
+        if (preg_replace('/\s+/', '', $this->token) != '' || $this->token != null)
+        {
+            // If a token is set attempt to send it in the header
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'Authorization: token ' . $this->token
+            ));
+        }
+        else 
+        {
+            // If no token is set, send the header as unauthenticated,
+            // some features may not work and a lower rate limit applies.
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Accept: application/json'
+            ));
+        }
         // Set the user agent
         curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
         // Set curl to return the response, rather than print it
@@ -79,7 +98,7 @@ class GitHubAPI
     function getDetails()
     {
         $url = 'https://api.github.com/users/' . $this->user;
-        return $this->getResults($url);
+        $this->details = $this->getResults($url);
     }
     
     /*
@@ -90,7 +109,7 @@ class GitHubAPI
     function getRepos()
     {
         $url = 'https://api.github.com/users/' . $this->user . '/repos';
-        return $this->getResults($url);
+        $this->repos = $this->getResults($url);
     }
     
     /*
@@ -101,7 +120,8 @@ class GitHubAPI
     function getRepo($repo)
     {
         $url = 'https://api.github.com/repos/' . $this->user . '/' . $repo;
-        return $this->getResults($url);
+        print_r('Retrieving: ' . $url . '<br/><br/>');
+        $this->repo = $this->getResults($url);
     }
     
     /*
@@ -182,5 +202,11 @@ class GitHubAPI
     {
         $url = 'https://api.github.com/users/' . $this->user . '/received_events';
         return $this->getResults($url);
+    }
+    
+    function getRateLimit()
+    {
+        $url = 'https://api.github.com/rate_limit';
+        $this->rateLimit = $this->getResults($url);
     }
 }
