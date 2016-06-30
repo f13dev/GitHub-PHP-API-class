@@ -80,7 +80,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of details relating to followers of the GitHubAPI
+     * user for which an object was created.
      */
     function getFollowers()
     {
@@ -89,7 +90,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of details relating to the users that are followed
+     * by the user for which an object was created.
      */
     function getFollowing()
     {
@@ -98,7 +100,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the public gists by the
+     * user for which an object was created.
      */
     function getGists()
     {
@@ -107,7 +110,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the repos starred by the
+     * user for which an object was created.
      */
     function getStarred()
     {
@@ -116,7 +120,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the subscriptions for the 
+     * user for which an object was created.
      */
     function getSubscriptions()
     {
@@ -125,7 +130,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the organizations which
+     * are linked to the user for which an object was created.
      */
     function getOrganizations()
     {
@@ -134,7 +140,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the events which are
+     * linked to the user for which an object was created.
      */
     function getEvents()
     {
@@ -143,7 +150,8 @@ class GitHubAPI
     }
     
     /*
-     *
+     * Returns an array of information relating to the received events which
+     * are linked to the user for which an object was created.
      */
     function getReceivedEvents()
     {
