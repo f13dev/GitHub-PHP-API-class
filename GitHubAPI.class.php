@@ -40,6 +40,7 @@ class GitHubAPI
         $this->organizations = null;
         $this->events = null;
         $this->receivedEvents = null;
+        $this->rateLimit = null;
     }
     
     /**
@@ -235,6 +236,10 @@ class GitHubAPI
         }
     }
     
+    /*
+     * Returns an aray of information relating to the rate limit for the IP
+     * address, or OAUTH key being used.
+     */
     function getRateLimit()
     {
         if ($this->rateLimit == null)
