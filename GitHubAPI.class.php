@@ -126,10 +126,13 @@ class GitHubAPI
      */
     function getRepo($repo)
     {
-        // As each call may be for a different repo this method will not check
-        // if the var is null, and will be overritten each time.
-        $url = 'https://api.github.com/repos/' . $this->user . '/' . $repo;
-        $this->repo = $this->getResults($url);
+        // Check if the currently stored repo has the same name
+        if ($this->repo['name'] != $repo)
+        {
+            echo '<h3>Getting repo info for: ' . $repo .'</h3>';
+            $url = 'https://api.github.com/repos/' . $this->user . '/' . $repo;
+            $this->repo = $this->getResults($url);
+        }
     }
     
     /*
@@ -248,6 +251,8 @@ class GitHubAPI
             $this->rateLimit = $this->getResults($url);
         }
     }
+    
+    // Start of getDetails functions
     
     /*
      * Returns the login name
@@ -409,5 +414,241 @@ class GitHubAPI
     {
         $this->getDetails();
         return $this->details['updated_at'];
+    }
+    
+    // Start of get Repo functions
+    
+    /*
+     * Returns the ID of the repository
+     */
+    function getRepoID($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['id'];
+    }
+    
+    /*
+     * Returns the name of the repository
+     */
+    function getRepoName($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['name'];
+    }
+    
+    /*
+     * Returns the full name of the repository user/repo
+     */
+    function getRepoFullName($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['full_name'];
+    }
+    
+    /*
+     * Returns the URL of the repository
+     */
+    function getRepoURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['html_url'];
+    }
+    
+    /*
+     * Returns the description of the repository
+     */
+    function getRepoDescription($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['description'];
+    }
+    
+    /*
+     * Returns true if the repo is a fork, otherwise false
+     */
+    function getRepoIsFork($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['fork'];
+    }
+    
+    /*
+     * Returns the date and time the repo was created
+     */
+    function getRepoCreationTime($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['created_at'];
+    }
+    
+    /*
+     * Retuns the date and time of the last push for a repo
+     */
+    function getRepoPushTime($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['pushed_at'];
+    }
+    
+    /*
+     * Returns the date and time that the repo was last updated
+     */
+    function getRepoUpdateTime($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['updated_at'];
+    }
+    
+    /*
+     * Returns the Git URL for the repo
+     */
+    function getRepoGitURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['git_url'];
+    }
+    
+    /*
+     * Returns the SSH URL for the repo
+     */
+    function getRepoSSHURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['ssh_url'];
+    }
+    
+    /*
+     * Returns the clone Git URL for the repo
+     */
+    function getRepoCloneURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['clone_url'];
+    }
+    
+    /*
+     * Returns the SVN URL for the repo
+     */
+    function getRepoSVNURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['svn_url'];
+    }
+    
+    /*
+     * Returns the homepage for the repo, null if not set
+     */
+    function getRepoHomepage($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['homepage'];
+    }
+    
+    /*
+     * Returns the size of the repo
+     */
+    function getRepoSize($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['size'];
+    }
+    
+    /*
+     * Returns the number of stargazers for the repo
+     */
+    function getRepoNumberStargazers($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['stargazers_count'];
+    }
+    
+    /*
+     * Returns the number of watchers for the repo
+     */
+    function getRepoNumberWatchers($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['watchers_count'];
+    }
+    
+    /*
+     * Get the language of the repo (Java, PHP etc...)
+     */
+    function getRepoLanguage($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['language'];
+    }
+    
+    /*
+     * Returns the boolean value whether the repo has an issues page
+     */
+    function getRepoHasIssues($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['has_issues'];
+    }
+    
+    /*
+     * Returns the boolean value whether the repo has downloads
+     */
+    function getRepoHasDownloads($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['has_downloads'];
+    }
+    
+    /*
+     * Returns the boolean value whether the repo has a wiki page
+     */
+    function getRepoHasWiki($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['has_wiki'];
+    }
+    
+    /*
+     * Returns the boolean value whether the repo has pages
+     */
+    function getRepoHasPages($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['has_pages'];
+    }
+    
+    /*
+     * Returns the number of forks of the repo
+     */
+    function getRepoNumberForks($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['forks_count'];
+    }
+    
+    /*
+     * Returns the mirror url for the repo, if none is set null is returned
+     */
+    function getRepoMirrorURL($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['mirror_url'];
+    }
+    
+    /*
+     * Returns the number of open issues for the repo
+     */
+    function getRepoNumberIssues($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['open_issues_count'];
+    }
+    
+    /*
+     * Returns the number of subscribers for the repo
+     */
+    function getRepoNumberSubscribers($repo)
+    {
+        $this->getRepo($repo);
+        return $this->repo['subscriber_count'];
     }
 }

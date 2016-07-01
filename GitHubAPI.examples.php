@@ -6,6 +6,8 @@ require_once('GitHubAPI.class.php');
 // giving the username 'f13dev' as the argument
 $api = new GitHubAPI('f13dev');
 
+// Echo a header for the user details
+echo '<h1>User Details</h1>';
 // Get Username
 echo 'Login: ' . $api->getLogin() . '<br/>';
 // Get Github ID
@@ -43,7 +45,51 @@ echo 'Creation date/time: ' . $api->getProfileCreationTime() . '<br/>';
 // Get the time and date that the user profile was last updated
 echo 'Last updated: ' . $api->getProfileUpdateTime() . '<br/>';
 
+// Create header for repo
+echo '<h1>Repo AlbumSystem</h1>';
+// Get the repo ID
+echo 'Repo ID: ' . $api->getRepoID('AlbumSystem') . '<br/>';
+// Get the repo name
+echo 'Repo name: ' . $api->getRepoName('AlbumSystem') . '<br/>';
+// Get the repo full name
+echo 'Repo full name: ' . $api->getRepoFullName('AlbumSystem') . '<br/>';
+// Get the repo URL
+echo 'Repo URL: ' . $api->getRepoURL('AlbumSystem') . '<br/>';
+// Get the repo description
+echo 'Repo description: ' . $api->getRepoDescription('AlbumSystem') . '<br/>';
+// Show if the repo is a fork
+echo 'Repo is a fork: ' . $api->getRepoIsFork('AlbumSystem') . '<br/>';
+// Show the creation time for the repo
+echo 'Repo created at: ' . $api->getRepoCreationTime('AlbumSystem') . '<br/>';
+// Show the latest push time for the repo
+echo 'Latest push: ' . $api->getRepoPushTime('AlbumSystem') . '<br/>';
+// Show latest update time for the repo
+echo 'Latest update: ' . $api->getRepoUpdateTime('AlbumSystem') . '<br/>';
+// Show the URL to the git file for the repo
+echo 'Git file: ' . $api->getRepoGitURL('AlbumSystem') . '<br/>';
+// Show the SSH URL for the repo
+echo 'SSH URL: ' . $api->getRepoSSHURL('AlbumSystem') . '<br/>';
+// Show the Clone URL for the repo
+echo 'Clone URL: ' . $api->getRepoCloneURL('AlbumSystem') . '<br/>';
+// Show the SVN URL for the repo
+echo 'SVN URL: ' . $api->getRepoSVNURL('AlbumSystem') . '<br/>';
+// Show the repo homepage
+echo 'Homepage: ' . $api->getRepoHomepage('AlbumSystem') . '<br/>';
+// Show the repo size
+echo 'Size: ' . $api->getRepoSize('AlbumSystem') . '<br/>';
+// Show the number of stargazers for the repo
+echo 'Stargazers: ' . $api->getRepoNumberStargazers('AlbumSystem') . '<br/>';
+// Show the number of watchers for the repo
+echo 'Stargazers: ' . $api->getRepoNumberWatchers('AlbumSystem') . '<br/>';
+// Get the programming language for the repo
+echo 'Language: ' . $api->getRepoLanguage('AlbumSystem') . '<br/>';
 
+
+
+
+
+
+echo '<h1>Rate Limit</h1>';
 // Show the number of remaining API calls before the rate limit is reached
 $api->getRateLimit();
 echo 'Rate limit: ' . $api->rateLimit['resources']['core']['remaining'];
